@@ -22,15 +22,15 @@ spark = (SparkSession
 )
 
 # Чтение данных из справочника кодов преступлений
-offense_codes_df = spark.read.csv(args.input_folder + "/offense_codes.csv", header=True, inferSchema=True)
-#offense_codes_df.show()
+offense_codes_df = spark.read.csv(args.input_folder + "/offense_codes.csv", header = True, inferSchema = True)
+#offense_codes_df.show(truncate = False)
 
 # Информация о схеме
 #offense_codes_df.printSchema()
 
 # Чтение данных о преступлениях
-crime_df = spark.read.csv(args.input_folder + "/crime.csv", header=True, inferSchema=True)
-#crime_df.show()
+crime_df = spark.read.csv(args.input_folder + "/crime.csv", header = True, inferSchema = True)
+#crime_df.show(truncate = False)
 
 # Информация о схеме
 #crime_df.printSchema()
@@ -65,7 +65,7 @@ GROUP BY
     code
 """)
 
-#unique_offense_codes_df.show(truncate=False)
+#unique_offense_codes_df.show(truncate = False)
 
 # Регистрация DataFrame как временного представления
 unique_offense_codes_df.createOrReplaceTempView("unique_offense_codes")
@@ -147,7 +147,7 @@ GROUP BY
     T.district
 """)
 
-#frequent_crime_types_df.show(truncate=False)
+#frequent_crime_types_df.show(truncate = False)
 
 # Регистрация DataFrame как временных представлений
 crimes_total_lat_lng_df.createOrReplaceTempView("crimes_total_lat_lng")
@@ -170,7 +170,7 @@ ORDER BY
     T1.district
 """)
 
-#data_mart_df.show(truncate=False)
+#data_mart_df.show(truncate = False)
 
 # Сохранение витрины в файл crimes_in_boston_analysis.parquet
 data_mart_df.write.mode("overwrite").parquet(args.output_folder + "/crimes_in_boston_analysis.parquet")
